@@ -121,6 +121,7 @@
 
     <?php echo get_template_part('template-parts/header/header-search');?>
     <?php echo get_template_part('template-parts/header/offcanvas');?>
+    <?php echo get_template_part('template-parts/header/offcanvas');?>
 
 
 
