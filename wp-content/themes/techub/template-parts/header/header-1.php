@@ -1,31 +1,33 @@
- <?php 
+<?php 
      
      $address_text = get_theme_mod('address_text',__('Manchester 21, Zurich, CH','techub'));
      $address_url = get_theme_mod('address_url',__('#','techub'));
      $email_address = get_theme_mod('email_address',__('techubinfo@mail.com','techub'));
-     $header_top_switch = get_theme_mod('header_top_switch',false);
+     $header_top_switch = get_theme_mod('header_top_switch', false);
+     $header_right_side_switch = get_theme_mod('header_right_side_switch', false);
+
+     $header_button_text = get_theme_mod('header_button_text',__('Get a Quete','techub'));
+     $header_button_url = get_theme_mod('header_button_url',__('#','techub'));
+
+     $menu_col = $header_right_side_switch == true ? '6' : '10 text-end';
 
 ?>
 
 
     <!-- header area start -->
     <header class="tp-header-height">
-
-        <?php if(!empty($header_top_switch)):?>
+<?php if(!empty($header_top_switch)) : ?>
         <div class="tp-header-top tp-header-5-top pt-10 pb-10 pl-110 pr-110 d-none d-xl-block">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-6">
                         <div class="tp-header-top-address tp-header-5-top-address">
-
-                            <?php if(!empty($address_text)):?>
-                            <span><i class="fa-thin fa-location-dot"></i><a href="<?php echo esc_url($address_text) ; ?>"><?php echo esc_html($address_text); ?></a></span>
+                            <?php if(!empty($address_text)) : ?>
+                            <span><i class="fa-thin fa-location-dot"></i><a href="<?php echo esc_url($address_url); ?>"> <?php echo esc_html($address_text); ?></a></span>
                             <?php endif; ?>
-                            
-                            <?php if(!empty($email_address)):?>
-                            <span><i class="fa-light fa-envelope"></i> <a href="mailto:<?php echo esc_attr($email_address);?>"><?php echo esc_html ($email_address); ?></a></span>
-                            <?php endif; ?>
-
+                            <?php if(!empty($email_address)) : ?>
+                            <span><i class="fa-light fa-envelope"></i> <a href="mailto:<?php echo esc_attr( $email_address); ?>"><?php echo esc_html($email_address); ?></a></span>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="col-xl-6">
@@ -38,7 +40,7 @@
                                 </ul>
                             </div>
                             <div class="tp-header-top-social">
-                                <?php techub_header_social() ?>
+                                <?php techub_header_social(); ?>
                             </div>
                         </div>
                     </div>
@@ -53,43 +55,18 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-4 col-md-4 col-6">
                             <div class="logo">
-                                <?php techub_header_logo() ?>
-                                
+                                <?php techub_header_logo(); ?>
                             </div>
                         </div>
-                        <div class="col-xl-6 d-none d-xl-block">
+                        <div class="col-xl-<?php echo esc_attr($menu_col); ?> d-none d-xl-block">
                             <div class="main-menu main-menu-5">
                                 <nav class="tp-main-menu-content">
-                                    <ul>
-                                        <li class="has-dropdown"><a class="color-active" href="index.html">Home</a></li>
-                                        <li class="has-dropdown"><a href="#">Pages</a>
-                                            <ul class="submenu tp-submenu">
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="team.html">Our Team</a></li>
-                                                <li><a href="team-details.html">Team Details</a></li>
-                                                <li><a href="portfolio.html">Our Portfolio</a></li>
-                                                <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                                                <li><a href="error.html">Error</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="portfolio.html">Portfolio</a></li>
-                                        <li class="has-dropdown"><a href="service.html">Services</a>
-                                            <ul class="submenu tp-submenu">
-                                                <li><a href="service.html">Our Service</a></li>
-                                                <li><a href="service-details.html">Service Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="has-dropdown"><a href="blog.html">Blog</a>
-                                            <ul class="submenu tp-submenu">
-                                                <li><a href="blog-sideber.html">Blog Sidebar</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
+                              <?php techub_menu();?> 
                                 </nav>
                             </div>
                         </div>
+
+                        <?php if(!empty($header_right_side_switch)) : ?>
                         <div class="col-xl-4 col-lg-8 col-md-8 col-6">
                             <div class="tp-header-right d-flex justify-content-end align-items-center">
 
@@ -98,10 +75,12 @@
                                     <button><i class="flaticon-search"></i></button>
                                 </div>
 
+                                <?php if(!empty($header_button_text)) : ?>
                                 <!-- header button -->
                                 <div class="tp-header-button d-none d-lg-block">
-                                    <a class="tp-header-btn" rel="noreferrer" href="contact.html" target="_blank"><span>Get a Quete</span></a>
+                                    <a class="tp-header-btn" rel="noreferrer" href="<?php echo esc_url($header_button_url); ?>" target="_blank"><span><?php echo esc_html($header_button_text); ?></span></a>
                                 </div>
+                                <?php endif; ?>
 
                                 <!-- header mobile menu ber -->
                                 <div class="tp-header-menu-ber">
@@ -110,6 +89,8 @@
 
                             </div>
                         </div>
+                        <?php endif; ?>
+
                     </div>
                 </div>
             </div>
@@ -117,14 +98,9 @@
     </header>
     <!-- header area end -->
 
-
-
-    <?php echo get_template_part('template-parts/header/header-search');?>
-    <?php echo get_template_part('template-parts/header/offcanvas');?>
+ <?php echo get_template_part('template-parts/header/header-search'); ?>
+ <?php echo get_template_part('template-parts/header/offcanvas'); ?>
    
-
-
-
 
      
 

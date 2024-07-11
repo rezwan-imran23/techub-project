@@ -25,11 +25,12 @@ function techub_theme_support(){
         'quote' 
     ));
 
-    // register_nav_menus(
-    //     array(
-    //         'main-menu' => __('Main Menu','harry'),
-    //     )
-    // );
+
+    register_nav_menus( array(
+        'main-menu' => __( 'Main Menu', 'techub' ),
+    ) );
+
+   
 
     // remove_theme_support( 'widgets-block-editor' );
 
@@ -54,6 +55,7 @@ add_action( 'after_setup_theme', 'techub_theme_support' );
 
 include_once('inc/template-function.php');
 include_once('inc/common/scripts.php');
+include_once('inc/nav-walker.php');
 
 if ( class_exists( 'Kirki' ) ) {
 	include_once('inc/techub-kirki.php');
