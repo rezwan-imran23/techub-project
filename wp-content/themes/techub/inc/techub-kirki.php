@@ -229,8 +229,6 @@ function techub_header_side_section (){
 }
 techub_header_side_section ();
 
-
-
 // section 2
 
 function techub_header_social_section(){
@@ -243,9 +241,7 @@ function techub_header_social_section(){
             'priority'    => 160,
         ]
     );
-    
-    
-    
+     
     new \Kirki\Field\Text(
         [
             'settings' => 'header_facebook_url',
@@ -255,8 +251,6 @@ function techub_header_social_section(){
             'priority' => 10,
         ]
     );
-    
-    
     
     new \Kirki\Field\Text(
         [
@@ -293,7 +287,7 @@ function techub_header_social_section(){
 techub_header_social_section();
 
 
-// section 3
+// Logo section 3
 
 function techub_header_logo_section (){
     new \Kirki\Section(
@@ -319,3 +313,43 @@ function techub_header_logo_section (){
 
 }
 techub_header_logo_section ();
+
+
+// techub_footer_section 4
+
+function techub_footer_section (){
+    new \Kirki\Section(
+        'techub_footer_section',
+        [
+            'title'       => esc_html__( 'Footer', 'techub' ),
+            'description' => esc_html__( 'My Footer Section Description.', 'techub' ),
+            'panel'       => 'techub_panel',
+            'priority'    => 160,
+        ]
+    );
+
+
+    new \Kirki\Field\Image(
+        [
+            'settings'    => 'footer_bg_image',
+            'label'       => esc_html__( 'Footer BG Image', 'techub' ),
+            'description' => esc_html__( 'Please set your footer bg image.', 'techub' ),
+            'section'     => 'techub_footer_section',
+    
+        ]
+    );
+
+
+
+    new \Kirki\Field\Text(
+        [
+            'settings' => 'footer_copyright',
+            'label'    => esc_html__( 'Copyright Text', 'techub' ),
+            'section'  => 'techub_footer_section',
+            'default'  => esc_html__( 'Full Copyright & Design By @ Theme pure – 2024 – 2024', 'techub' ),
+            'priority' => 10,
+        ]
+    );
+
+}
+techub_footer_section ();
