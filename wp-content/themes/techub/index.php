@@ -8,37 +8,13 @@
                 <div class="row">
                     <div class="col-xxl-8 col-xl-8 col-lg-8">
                         <div class="tp-postbox-wrapper">
-                            
+
                     <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-                                <?php get_template_part('template-parts/content'); ?>
+                                <?php get_template_part('template-parts/content', get_post_format()); ?>
                         <?php endwhile; else : ?> 
                                              <p><?php _e( 'No Posts To Display.' ); ?></p>
                         <?php endif; ?> 
 
-
-
-                            
-                            <!-- <div class="tp-postbox-pagination">
-                                <nav>
-                                    <ul>
-                                        <li>
-                                            <a href="blog-sideber.html"><i class="fa-solid fa-arrow-left-long"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-sideber.html">1</a>
-                                        </li>
-                                        <li>
-                                            <a class="active" href="blog-sideber.html">2</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-sideber.html">3</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-sideber.html"><i class="fa-solid fa-arrow-right-long"></i></a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div> -->
                         </div>
                     </div>
                     <div class="col-xxl-4 col-xl-4 col-lg-4">
