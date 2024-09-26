@@ -1,4 +1,8 @@
+                            <?php
+
+                            $post_format_url = function_exists('get_field')?  get_field('post_format_url') : '';
                             
+                            ?>
                             
                             <article id="post-<?php the_ID()?>" <?php post_class('tp-postbox-item mb-50') ?>>
 
@@ -10,11 +14,12 @@
                                     <div class="tp-postbox-date-text">
                                         <span><?php the_time( 'd' ); ?> <br> <?php the_time( 'M' ); ?> </span>
                                     </div>
+                                    <?php if(!empty($post_format_url)) : ?>
                                     <div class="tp-postbox-thumb-video">
-                                        <a class="popup-video" href="https://www.youtube.com/watch?v=go7QYaQR494"><i class="fa-regular fa-play"></i></a>
+                                        <a class="popup-video" href= "<?php echo esc_url($post_format_url); ?>"><i class="fa-regular fa-play"></i></a>
                                     </div>
+                                    <?php endif ?>
                                 </div>
-
                                 <?php endif ?>
                                 
                                 <div class="tp-postbox-content">
@@ -27,8 +32,6 @@
                                     <div class="tp-postbox-text">
                                         <?php the_excerpt();?>
                                     </div>
-                                    <div class="tp-postbox-read">
-                                        <a class="tp-btn" rel="noreferrer" href="<?php the_permalink() ?>" target="_blank"><span>Read More</span></a>
-                                    </div>
+                                    <?php echo get_template_part('template-parts/blog/button');?>
                                 </div>
                             </article>

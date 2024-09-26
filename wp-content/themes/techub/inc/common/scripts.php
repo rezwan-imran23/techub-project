@@ -15,7 +15,7 @@ function add_theme_scripts() {
     wp_enqueue_style( 'style', get_stylesheet_uri() );
 
 	//wp_enqueue_script
-
+	
 	wp_enqueue_script( 'bootstrap-bundle', get_template_directory_uri() . '/assets/js/bootstrap-bundle.js', array( 'jquery' ),'5.1.3', true );
 	wp_enqueue_script( 'countdown', get_template_directory_uri() . '/assets/js/countdown.js', array( 'jquery' ),'0.1.0', true );
 	wp_enqueue_script( 'waypoints', get_template_directory_uri() . '/assets/js/waypoints.js', array( 'jquery' ),'0.1.0', true );
