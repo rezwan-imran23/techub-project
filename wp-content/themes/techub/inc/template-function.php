@@ -171,3 +171,59 @@ function techub_kses( $allow_tags = '' ) {
 	return wp_kses( $allow_tags, $allowed_html );
 }
 
+
+function techub_navigation (){
+   $pages = paginate_links( array(
+      'type' => 'array',
+      'prev_text' => __('<i class="fa-solid fa-arrow-left-long"></i>','techub'),
+      'next_text' => __('<i class="fa-solid fa-arrow-right-long"></i>','techub'),
+   ));
+      if ($pages){
+         echo '<div class="tp-postbox-pagination"><nav><ul>';
+         foreach ($pages as $page){
+            echo "<li>$page</li>";
+         }
+         echo '</nav></ul></div>';
+      }
+}
+
+
+
+
+
+/**
+ * Generate custom search form
+ *
+ * @param string $form Form HTML.
+ * @return string Modified form HTML.
+ */
+function techub_search_form( $form ) {
+	$form = '<div class="sidebar__widget-theme-bg">
+               <div class="sidebar__widget-content">
+                  <div class="sidebar__search">
+                        <form role="search" method="get" action="' . home_url( '/' ) . '">
+                           <div class="sidebar__search-input-2">
+                              <input type="text" value="' . get_search_query() . '" name="s" placeholder="Search here">
+                              <button type="submit"><i class="far fa-search"></i></button>
+                           </div>
+                        </form>
+                  </div>
+               </div>
+            </div>';
+
+	return $form;
+}
+add_filter( 'get_search_form', 'techub_search_form' );
+
+
+
+// ==================Tags====================
+
+function techub_tags(){ 
+   $tags = get_the_tags(); 
+
+   foreach( $tags as $tag) { ?>
+   <a href="<?php echo get_tag_link($tag);?>"><?php echo esc_html($tag->name);?></a>
+   <?php
+   }
+}

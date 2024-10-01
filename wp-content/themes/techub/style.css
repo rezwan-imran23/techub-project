@@ -1,12 +1,29 @@
 /*
-Theme Name: My Theme
-Author: Theme_pure
-Author URI: http://www.hostinger.com/tutorials
-Description: My first responsive HTML5 theme
-Version: 1.0
+Theme Name: Techub
+Author: Theme_Pure
+Author URI: https://themeforest.net/user/hixstudio
+Description: Techub is a Modern & Professional WP Theme which is perfectly suitable for the Agency, Marketing, Consulting, start-up, IT Solutions, and Services Company related any business website.
+Version: 1.0.0
+Text Domain: techub
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 
+.rc__post-thumb img  {
+    height: 72px;
+    width: 72px;
+    object-fit: cover;
+}
 
+.postbox__comment.mb-95 {
+    list-style: none;
+}
+
+
+.comment  .children{
+	margin-left: 50px;
+}
+.post.post-post.current-item {
+	color: #fff;
+}

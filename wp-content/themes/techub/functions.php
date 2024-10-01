@@ -27,7 +27,7 @@ function techub_theme_support(){
 
 
     register_nav_menus( array(
-        'main-menu' => __( 'Main Menu', 'techub' ),
+        'main-menu' => __( 'Main Menu', 'foodhut' ),
     ) );
 
    
@@ -58,6 +58,17 @@ add_action( 'after_setup_theme', 'techub_theme_support' );
  */
 function techub_widgets_init() {
 
+	register_sidebar( array(
+		'name'          => __( 'Blog Sidebar', 'techub' ),
+		'id'            => 'blog-sidebar',
+		'description'   => __( 'Widgets in this area will be shown on blog sidebar.', 'techub' ),
+		'before_widget' => '<div id="%1$s" class="sidebar__widget mb-30 %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="sidebar__widget-title">',
+		'after_title'   => '</h3>',
+	) );
+	
+	
 	register_sidebar( array(
 		'name'          => __( 'Footer Widget 01', 'techub' ),
 		'id'            => 'footer-widget-1',
@@ -103,9 +114,12 @@ add_action( 'widgets_init', 'techub_widgets_init' );
 
 
 
+
 include_once('inc/template-function.php');
 include_once('inc/common/scripts.php');
 include_once('inc/nav-walker.php');
+include_once('inc/recent-post.php');
+include_once('inc/category-list.php');
 
 if ( class_exists( 'Kirki' ) ) {
 	include_once('inc/techub-kirki.php');
