@@ -25,6 +25,7 @@
                     <div class="tp-postbox-details-text">
 
                     <?php the_content();?>
+                             <img src="<?php get_template_directory_uri();?>/assets/img/error/error.png" alt="">
                         
                 </div>
                 </div>
@@ -61,7 +62,7 @@
 
 
 
-        <!-- ===================Post===================== -->
+        <!-- =================== All Posts===================== -->
                             
     <article id="post-<?php the_ID()?>" <?php post_class('tp-postbox-item mb-50') ?>>
 

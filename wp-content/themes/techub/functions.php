@@ -115,11 +115,14 @@ add_action( 'widgets_init', 'techub_widgets_init' );
 
 
 
+
+// include_once('inc/common/scripts.php');
 include_once('inc/template-function.php');
 include_once('inc/common/scripts.php');
 include_once('inc/nav-walker.php');
 include_once('inc/recent-post.php');
 include_once('inc/category-list.php');
+include_once('inc/breadcrumb.php');
 
 if ( class_exists( 'Kirki' ) ) {
 	include_once('inc/techub-kirki.php');
