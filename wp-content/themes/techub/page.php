@@ -10,8 +10,9 @@
                         <div class="tp-page-wrapper">
 
                     <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+                    
                     <?php the_content(); ?>
-                    <?php the_title();?>
+            
                         <?php endwhile; else : ?> 
                                 <p><?php _e( 'No Page To Display.' ); ?></p>
                         <?php endif; ?> 

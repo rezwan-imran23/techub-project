@@ -56,9 +56,9 @@ function techub_breadcrumb(){
     $breadcrumb_switch = function_exists('get_field') ? get_field('breadcrumb_switch',$_id) : null;
 
     ?>
+    
     <?php if(!empty($breadcrumb_switch) ) : ?>
-
-         <!-- portfolio area start -->
+        
          <section class="tp-blog-breadcrumb-area" data-background=" <?php echo esc_url($breadcrumb_bg_img)?> ">
             <div class="container">
                 <div class="row">
@@ -70,7 +70,6 @@ function techub_breadcrumb(){
                 </div>
             </div>
         </section>
-        <!-- portfolio area end -->
 
     <?php endif; ?>
 <?php
