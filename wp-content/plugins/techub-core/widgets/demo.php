@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  */
-class Hello_World extends Widget_Base {
+class Demo_Test extends Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -25,7 +25,7 @@ class Hello_World extends Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'hello-world';
+		return 'demo-test';
 	}
 
 	/**
@@ -38,7 +38,7 @@ class Hello_World extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Hello World', 'elementor-hello-world' );
+		return __( 'Demo Test', 'elementor-hello-world' );
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Hello_World extends Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-posts-ticker';
+		return 'eicon-elementor';
 	}
 
 	/**
@@ -100,51 +100,89 @@ class Hello_World extends Widget_Base {
 	 * @access protected
 	 */
 	protected function register_controls() {
+
 		$this->start_controls_section(
-			'section_content',
+			'demo_section',
 			[
-				'label' => __( 'Content', 'elementor-hello-world' ),
+				'label' => esc_html__( 'Techub Heading', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+
+		$this->add_control(
+			'techub_title',
+			[
+				'label' => esc_html__( 'Title', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( 'Default title', 'textdomain' ),
+				'placeholder' => esc_html__( 'Type your title here', 'textdomain' ),
 			]
 		);
 
 		$this->add_control(
-			'title',
+			'techub_description',
 			[
-				'label' => __( 'Title', 'elementor-hello-world' ),
-				'type' => Controls_Manager::TEXT,
+				'label' => esc_html__( 'Description', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 10,
+				'default' => esc_html__( 'Default description', 'textdomain' ),
+				'placeholder' => esc_html__( 'Type your description here', 'textdomain' ),
 			]
 		);
+
+
+		$this->end_controls_section();
+
+
+
+		$this->start_controls_section(
+			'techub_image_section',
+			[
+				'label' => esc_html__( 'Image', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+
+		$this->add_control(
+			'techub_image',
+			[
+				'label' => esc_html__( 'Choose Image', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::MEDIA,
+				'default' => [
+					'url' => \Elementor\Utils::get_placeholder_image_src(),
+				],
+			]
+		);
+		
 
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'section_style',
+			'techub_style_section',
 			[
-				'label' => __( 'Style', 'elementor-hello-world' ),
-				'tab' => Controls_Manager::TAB_STYLE,
+				'label' => esc_html__( 'Style', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
-			'text_transform',
+			'text_color',
 			[
-				'label' => __( 'Text Transform', 'elementor-hello-world' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => '',
-				'options' => [
-					'' => __( 'None', 'elementor-hello-world' ),
-					'uppercase' => __( 'UPPERCASE', 'elementor-hello-world' ),
-					'lowercase' => __( 'lowercase', 'elementor-hello-world' ),
-					'capitalize' => __( 'Capitalize', 'elementor-hello-world' ),
-				],
+				'label' => esc_html__( 'Text Color', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .title' => 'text-transform: {{VALUE}};',
+					'{{WRAPPER}} .el-title' => 'color: {{VALUE}}',
 				],
 			]
 		);
 
 		$this->end_controls_section();
+
 	}
+
+	
 
 	/**
 	 * Render the widget output on the frontend.
@@ -158,25 +196,27 @@ class Hello_World extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		echo '<div class="title">';
-		echo $settings['title'];
-		echo '</div>';
-	}
-
-	/**
-	 * Render the widget output in the editor.
-	 *
-	 * Written as a Backbone JavaScript template and used to generate the live preview.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access protected
-	 */
-	protected function content_template() {
 		?>
-		<div class="title">
-			{{{ settings.title }}}
+
+		<div class="container">
+
+		<div class="row">
+			<div class="col-xl-6">
+				<h1 class="el-title" ><?php echo esc_html($settings['techub_title']);?></h1>
+				<p><?php echo esc_html($settings['techub_description']);?></p>
+			</div>
+
+			<div class="col-xl-6">
+			<img src="<?php echo esc_url($settings['techub_image']['url']);?>" alt="">
+			</div>
 		</div>
+
+		</div>
+
 		<?php
 	}
+
+	
 }
+
+$widgets_manager->register( new Demo_Test() );

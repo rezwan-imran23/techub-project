@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  */
-class Hello_World extends Widget_Base {
+class Techub_BTN extends Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -25,7 +25,7 @@ class Hello_World extends Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'hello-world';
+		return 'techub-button';
 	}
 
 	/**
@@ -38,7 +38,7 @@ class Hello_World extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Hello World', 'elementor-hello-world' );
+		return __( 'Techub Button', 'elementor-hello-world' );
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Hello_World extends Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-posts-ticker';
+		return 'eicon-columns';
 	}
 
 	/**
@@ -99,52 +99,98 @@ class Hello_World extends Widget_Base {
 	 *
 	 * @access protected
 	 */
+
+	 
+
+
+
 	protected function register_controls() {
-		$this->start_controls_section(
-			'section_content',
-			[
-				'label' => __( 'Content', 'elementor-hello-world' ),
-			]
-		);
 
-		$this->add_control(
-			'title',
-			[
-				'label' => __( 'Title', 'elementor-hello-world' ),
-				'type' => Controls_Manager::TEXT,
-			]
-		);
+		$this-> register_controls_section();
+		$this-> style_tab_content();
 
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'section_style',
-			[
-				'label' => __( 'Style', 'elementor-hello-world' ),
-				'tab' => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'text_transform',
-			[
-				'label' => __( 'Text Transform', 'elementor-hello-world' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => '',
-				'options' => [
-					'' => __( 'None', 'elementor-hello-world' ),
-					'uppercase' => __( 'UPPERCASE', 'elementor-hello-world' ),
-					'lowercase' => __( 'lowercase', 'elementor-hello-world' ),
-					'capitalize' => __( 'Capitalize', 'elementor-hello-world' ),
-				],
-				'selectors' => [
-					'{{WRAPPER}} .title' => 'text-transform: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->end_controls_section();
 	}
+
+	//register control section
+
+	protected function  register_controls_section(){
+
+
+
+		//Button Start
+
+		$this->start_controls_section(
+			'button_section',
+			[
+				'label' => esc_html__( 'Button', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+
+		$this->add_control(
+			'button_text',
+			[
+				'label' => esc_html__( 'Button Text', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( 'Button Text', 'textdomain' ),
+				'placeholder' => esc_html__( 'Button text here', 'textdomain' ),
+			]
+		);
+
+		$this->add_control(
+			'button_link',
+			[
+				'label' => esc_html__( 'Link', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::URL,
+				'options' => [ 'url', 'is_external', 'nofollow' ],
+				'default' => [
+					'url' => '#',
+					'is_external' => true,
+					'nofollow' => true,
+					// 'custom_attributes' => '',
+				],
+				'label_block' => true,
+			]
+		);
+
+		$this->end_controls_section();
+
+		//Button End
+
+
+	}
+
+   //style tabs control section
+
+	protected function  style_tab_content(){
+
+		$this->start_controls_section(
+			'techub_style_section',
+			[
+				'label' => esc_html__( 'Style', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'text_color',
+			[
+				'label' => esc_html__( 'Text Color', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .el-title' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		
+	}
+
+	
+	
 
 	/**
 	 * Render the widget output on the frontend.
@@ -158,25 +204,31 @@ class Hello_World extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		echo '<div class="title">';
-		echo $settings['title'];
-		echo '</div>';
-	}
+		//Button
+		if ( !empty( $settings['button_link'] ) ) {
+			$this->add_link_attributes( 'button_arg', $settings['button_link'] );
+			$this->add_render_attribute( 'button_arg','class','tp-btn' );
+		}
 
-	/**
-	 * Render the widget output in the editor.
-	 *
-	 * Written as a Backbone JavaScript template and used to generate the live preview.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access protected
-	 */
-	protected function content_template() {
 		?>
-		<div class="title">
-			{{{ settings.title }}}
+
+		
+
+	<?php if (!empty($settings['button_text'])):?>
+		<div class="techub-btn">
+			<a <?php echo $this->get_render_attribute_string( 'button_arg' );?>>
+				<span><?php echo esc_html($settings['button_text'])?></span>
+			</a>							
 		</div>
+	<?php endif;?>
+
+	 
+		
 		<?php
 	}
+	
+
+	
 }
+
+$widgets_manager->register( new Techub_BTN() );
