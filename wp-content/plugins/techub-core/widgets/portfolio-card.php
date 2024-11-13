@@ -117,12 +117,44 @@ class Techub_Card extends Widget_Base {
 
 
 		$this->start_controls_section(
+			'design_section',
+			[
+				'label' => esc_html__( 'Layout Style', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+
+		$this->add_control(
+			'design_style',
+			[
+				'label' => esc_html__( 'Choose Layout', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'layout-1',
+				'options' => [
+					
+					'layout-1' => esc_html__( 'Style 01', 'textdomain' ),
+					'layout-2' => esc_html__( 'Style 02', 'textdomain' ),
+					
+					
+				],
+				
+			]
+		);
+
+		$this->end_controls_section();
+
+
+
+
+		$this->start_controls_section(
 			'hero_section',
 			[
 				'label' => esc_html__( 'Portfolio Info', 'textdomain' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
+
 
 
 		$this->add_control(
@@ -231,8 +263,21 @@ class Techub_Card extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-
 		?>
+
+		<?php if ($settings['design_style'] == 'layout-2' ):?>
+
+			<div class="tp-project-3-slide-wrapper mb-30 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+			<div class="tp-project-3-thumb tp-project-3-thumb-inner p-relative">
+				<img src="<?php echo esc_url($settings['techub_image']['url']); ?>" alt="">
+				<div class="tp-project-3-down-content text-center">
+					<span><?php echo techub_kses($settings['techub_sub_title']); ?></span>
+					<h4 class="tp-project-3-down-title"><a href="<?php echo esc_url($settings['techub_url']); ?>"><?php echo techub_kses($settings['techub_title']); ?></a></a></h4>
+				</div>
+			</div>
+		</div>
+
+		<?php else:?>
 
 			<div class="tp-project-5-wrapper wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
 				<div class="tp-project-5-thumb m-0 p-relative">
@@ -246,6 +291,8 @@ class Techub_Card extends Widget_Base {
 					</div>
 				</div>
 			</div>
+
+			<?php endif?>
 		
 
 		<?php

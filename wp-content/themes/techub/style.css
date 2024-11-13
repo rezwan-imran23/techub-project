@@ -27,3 +27,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 .post.post-post.current-item {
 	color: #fff;
 }
+
+.portfolio-filter-button.d-flex button {
+    margin-right: 20px;
+    background-color: darkgreen;
+    color: #fff;
+}
